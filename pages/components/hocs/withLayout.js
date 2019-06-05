@@ -16,10 +16,11 @@ function withLayout(WrappedComponent) {
     );
   };
 
-  withLayoutComponent.getInitialProps = ctx => {
-    if (WrappedComponent.getInitialProps)
+  if (WrappedComponent.getInitialProps) {
+    withLayoutComponent.getInitialProps = ctx => {
       return WrappedComponent.getInitialProps(ctx);
-  };
+    };
+  }
 
   return withLayoutComponent;
 }
