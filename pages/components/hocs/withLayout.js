@@ -6,13 +6,22 @@ const layoutStyle = {
   border: "1px solid #DDD"
 };
 
-const withLayout = Page => {
-  return () => (
-    <div style={layoutStyle}>
-      <Header />
-      <Page />
-    </div>
-  );
-};
+function withLayout(WrappedComponent) {
+  const withLayoutComponent = props => {
+    return (
+      <div style={layoutStyle}>
+        <Header />
+        <WrappedComponent {...props} />
+      </div>
+    );
+  };
+
+  withLayoutComponent.getInitialProps = ctx => {
+    if (WrappedComponent.getInitialProps)
+      return WrappedComponent.getInitialProps(ctx);
+  };
+
+  return withLayoutComponent;
+}
 
 export default withLayout;

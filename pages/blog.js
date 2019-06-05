@@ -1,18 +1,27 @@
 import Link from "next/link";
 import withLayout from "./components/hocs/withLayout";
 
-const PostLink = props => (
+const PostLink = ({ id, title }) => (
   <li>
-    <Link href={`/post?title=${props.title}`}>
-      <a>{props.title}</a>
+    <Link as={`/p/${id}`} href={`/post?title=${title}`}>
+      <a>{title}</a>
     </Link>
   </li>
 );
 
 const posts = [
-  "Hello Next.js",
-  "Learn Next.js is awesome",
-  "Deploy apps with Zeit"
+  {
+    id: "hello-nextjs",
+    title: "Hello Next.js"
+  },
+  {
+    id: "learn-nextjs",
+    title: "Learn Next.js is awesome"
+  },
+  {
+    id: "deploy-nextjs",
+    title: "Deploy apps with Zeit"
+  }
 ];
 
 const Blog = () => {
@@ -21,7 +30,7 @@ const Blog = () => {
       <h1>My Blog</h1>
       <ul>
         {posts.map(post => (
-          <PostLink title={post} />
+          <PostLink key={post.id} id={post.id} title={post.title} />
         ))}
       </ul>
     </>
