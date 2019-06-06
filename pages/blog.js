@@ -1,15 +1,7 @@
 import Link from "next/link";
 import withLayout from "./components/hocs/withLayout";
 
-const PostLink = ({ id, title }) => (
-  <li>
-    <Link as={`/p/${id}`} href={`/post?title=${title}`}>
-      <a>{title}</a>
-    </Link>
-  </li>
-);
-
-const posts = [
+const getPosts = () => [
   {
     id: "hello-nextjs",
     title: "Hello Next.js"
@@ -24,15 +16,49 @@ const posts = [
   }
 ];
 
+const PostLink = ({ title, id }) => (
+  <li>
+    <Link as={`/p/${id}`} href={`/post?title=${title}`}>
+      <a>{title}</a>
+    </Link>
+    <style jsx>{`
+      li {
+        list-style: none;
+        margin: 5px 0;
+      }
+
+      a {
+        text-decoration: none;
+        color: blue;
+        font-family: "Arial";
+      }
+
+      a:hover {
+        opacity: 0.6;
+      }
+    `}</style>
+  </li>
+);
+
 const Blog = () => {
   return (
     <>
       <h1>My Blog</h1>
       <ul>
-        {posts.map(post => (
-          <PostLink key={post.id} id={post.id} title={post.title} />
+        {getPosts().map(({ id, title }) => (
+          <PostLink key={id} id={id} title={title} />
         ))}
       </ul>
+      <style jsx>{`
+        h1,
+        a {
+          font-family: "Arial";
+        }
+
+        ul {
+          padding: 0;
+        }
+      `}</style>
     </>
   );
 };
