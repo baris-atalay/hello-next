@@ -54,6 +54,9 @@ const Blog = () => {
         a {
           font-family: "Arial";
         }
+        h1 {
+          color: #f00;
+        }
 
         ul {
           padding: 0;
